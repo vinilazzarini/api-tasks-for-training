@@ -21,7 +21,7 @@ public class Task {
 
     private String description;
 
-    private boolean completed;
+    private boolean completed = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
