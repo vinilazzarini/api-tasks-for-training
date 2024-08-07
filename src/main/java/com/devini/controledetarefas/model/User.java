@@ -22,9 +22,6 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    @NotEmpty(message = "Password is required")
-    private String password;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Task> tasks;
 }
