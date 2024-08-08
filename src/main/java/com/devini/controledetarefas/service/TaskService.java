@@ -18,16 +18,16 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public List<Task> findByUserId(Long userId) {
-        return taskRepository.findByUserId(userId);
+    public List<Task> findByUsername(String username) {
+        return taskRepository.findByUsername(username);
     }
 
     public Optional<Task> findById(Long id) {
         return taskRepository.findById(id);
     }
 
-    public List<Task> findByIdAndCompleted(Long id, boolean completed) {
-        return taskRepository.findByUserIdAndCompleted(id,completed);
+    public List<Task> findByUsernameAndCompleted(String username, boolean completed) {
+        return taskRepository.findByUsernameAndCompleted(username,completed);
     }
 
     public void deleteById(Long id) {
