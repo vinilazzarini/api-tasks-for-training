@@ -22,24 +22,6 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{username}")
-    public ResponseEntity<List<Task>> getAllTasksByUsername(@PathVariable String username){
-        List<Task> tasks = taskService.findByUsername(username);
-        return ResponseEntity.ok(tasks);
-    }
-
-    @GetMapping("/user/{username}/completed")
-    public ResponseEntity<List<Task>> getCompletedTasksByUsername(@PathVariable String username){
-        List<Task> tasks = taskService.findByUsernameAndCompleted(username,true);
-        return ResponseEntity.ok(tasks);
-    }
-
-    @GetMapping("/user/{username}/not-completed")
-    public ResponseEntity<List<Task>> getNotCompletedTasksByUsername(@PathVariable String username){
-        List<Task> tasks = taskService.findByUsernameAndCompleted(username,false);
-        return ResponseEntity.ok(tasks);
-    }
-
     @PostMapping("/{username}")
     public ResponseEntity<Task> createTask(@RequestBody Task task, @PathVariable String username) {
 
@@ -51,6 +33,7 @@ public class TaskController {
         User user = userOptional.get();
         task.setUser(user);
         Task createdTask = taskService.save(task);
+
         return ResponseEntity.ok(createdTask);
 
     }
@@ -60,6 +43,7 @@ public class TaskController {
         return taskService.findById(id)
                 .map(existingTask -> {
                     task.setId(existingTask.getId());
+                    task.setUser(existingTask.getUser());
                     Task updatedTask = taskService.save(task);
                     return ResponseEntity.ok(updatedTask);
                 })

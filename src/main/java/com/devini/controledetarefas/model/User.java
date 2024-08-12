@@ -1,7 +1,7 @@
 package com.devini.controledetarefas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 @Entity
+@Table(name = "tb_user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +19,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Username is required")
     @Column(unique = true)
     private String username;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore()
     private Set<Task> tasks;
 }

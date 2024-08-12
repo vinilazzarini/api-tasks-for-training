@@ -1,12 +1,13 @@
 package com.devini.controledetarefas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "tb_task")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +17,6 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
     private String title;
 
     private String description;
